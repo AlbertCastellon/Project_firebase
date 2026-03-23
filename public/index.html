@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Items</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+  </head>
+
+  <body>
+    <div class="container p-5">
+      <div class="row">
+        <div class="col-8 offset-2" id="loginForm">
+          <form>
+            <div class="form-group row">
+              <label for="title" class="col-4 col-form-label">Correu electrònic:</label>
+              <div class="col-8">
+                <input type="email" class="form-control" id="loginEmail" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="content" class="col-4 col-form-label">Contrasenya:</label>
+              <div class="col-8">
+                <input type="password" class="form-control" id="loginPassword" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="offset-4 col-8">
+                <button type="button" id="newUser" class="btn btn-outline-primary float-right">
+                  Registrar un nou usuari
+                </button>
+                <button type="button" id="login" class="btn btn-default float-right mr-3">
+                  Entrar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-8 offset-2" id="signupForm" style="display: none">
+          <form>
+            <div class="form-group row">
+              <label for="title" class="col-4 col-form-label">Correu electrònic:</label>
+              <div class="col-8">
+                <input type="email" class="form-control" id="signupEmail" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="content" class="col-4 col-form-label">Contrasenya:</label>
+              <div class="col-8">
+                <input type="password" class="form-control" id="signupPassword" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="content" class="col-4 col-form-label">Confirmar contrasenya:</label>
+              <div class="col-8">
+                <input type="password" class="form-control" id="signupPasswordConfirm" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="offset-4 col-8">
+                <button type="button" id="signup" class="btn btn-default float-right">
+                  Enviar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-8 offset-2" id="itemsForm" style="display: none">
+          <form>
+            <div class="form-group row">
+              <label for="title" class="col-4 col-form-label">Títol:</label>
+              <div class="col-8">
+                <input type="text" class="form-control" id="title" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="content" class="col-4 col-form-label"
+                >Contingut:</label
+              >
+              <div class="col-8">
+                <input type="text" class="form-control" id="content" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="offset-4 col-8">
+                <button type="button" id="save" class="btn btn-default float-right">
+                  Guardar
+                </button>
+              </div>
+            </div>
+            <input type="hidden" id="elementId" />
+          </form>
+        </div>
+
+        <div class="col-2">
+          <div id="alert" role="alert"></div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover" id="listItems" style="display: none"></table>
+      </div>
+    </div>
+  </body>
+  <script language="javascript" src="js/config.js"></script>
+  <script language="javascript" src="js/firestore.js"></script>
+  <script language="javascript" src="js/items.js"></script>
+  <script language="javascript">
+    
+	// Funció per mostrar alertes a la UI
+    function showAlert(text, type) {
+      // Modifiquem el text i la classe CSS segons el tipus d'alerta
+      const alertEl = document.getElementById("alert");
+      alertEl.innerText = text;
+      alertEl.className = `alert ${type}`;
+      alertEl.style.display = "block";
+
+      // Disparem un temporitzador per ocultar l'alerta a 2 segons
+      setTimeout(() => {
+        alertEl.style.display = "none";
+      }, 2000);
+    }
+
+    // Quan la pàgina hagi carregat completament, carreguem els ítems
+    window.addEventListener("load", async () => {
+      await loadItems(); // Carrega i mostra la llista d'ítems
+    });
+
+    // Handler per a l'inici de sessió
+    document.getElementById("login").addEventListener("click", async () => {
+      // Obtenim credencials del formulari
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+
+      try {
+        // Intentem autenticar l'usuari amb Firebase Auth
+        await auth.signInWithEmailAndPassword(email, password);
+
+        // Si té èxit, mostrem missatge i canviem la UI
+        showAlert("Usuari autenticat", "alert-success");
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("itemsForm").style.display = "block";
+        document.getElementById("listItems").style.display = "table";
+      } catch (error) {
+        // En cas d'error, mostrem alerta d'avís
+        showAlert("Error d’autenticació", "alert-danger");
+      }
+    });
+
+    // Handler per mostrar el formulari de registre d'usuari nou
+    document.getElementById("newUser").addEventListener("click", () => {
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("signupForm").style.display = "block";
+    });
+
+    // Handler per al registre d'un nou usuari
+    document.getElementById("signup").addEventListener("click", async () => {
+      // Llegim valors del formulari
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+      const passwordConfirm = document.getElementById(
+        "signupPasswordConfirm"
+      ).value;
+
+      // Validacions bàsiques de formulari
+      if (!email || email.indexOf("@") < 1) {
+        showAlert("Email incorrecte", "alert-danger");
+        return;
+      }
+      if (!password) {
+        showAlert("La contrasenya és obligatòria", "alert-danger");
+        return;
+      }
+      if (password.length < 8) {
+        showAlert("La contrasenya ha de tenir una longitud mínima de 8 caràcters", "alert-danger");
+        return;
+      }
+      if (password !== passwordConfirm) {
+        showAlert("Les contrasenyes no coincideixen", "alert-danger");
+        return;
+      }
+
+      try {
+        // Creem l'usuari amb Firebase Auth
+        await auth.createUserWithEmailAndPassword(email, password);
+
+        // Si té èxit, mostrem missatge i tornem a la vista de login
+        showAlert("Usuari creat correctament", "alert-success");
+        document.getElementById("loginForm").style.display = "block";
+        document.getElementById("signupForm").style.display = "none";
+      } catch (error) {
+        // En cas d'error, mostrem alerta
+        showAlert("Error al intentar crear l'usuari", "alert-danger");
+      }
+    });
+
+    // Handler per guardar o actualitzar un ítem
+    document.getElementById("save").addEventListener("click", async () => {
+      // Obtenim valors del formulari
+      const id = document.getElementById("elementId").value;
+      const title = document.getElementById("title").value;
+      const content = document.getElementById("content").value;
+      const doc = { title, content }; // Objecte amb les dades a desar
+
+      if (!id) {
+        // Si no hi ha ID, afegim un nou ítem
+        await addItem(doc);
+      } else {
+        // Si hi ha ID, actualitzem l'ítem existent
+        await updateItem(id, doc);
+      }
+    });
+	
+  </script>
+</html>
