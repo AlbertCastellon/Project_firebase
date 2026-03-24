@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -16,7 +17,7 @@
 
   <body>
     <header>
-      <img src="https://drive.google.com/file/d/1dyl9Uy9Qsr9-Q2Zw7ibFRb6b9hW9s-PL/view?usp=drive_link" alt="">
+      <img src="./media/Logo2 SomNeteja.png" alt="SomNeteja logo" id="logo_header">
     </header>
     <div class="container p-5">
       <div class="row">
@@ -109,13 +110,14 @@
         </div>
       </div>
       <div class="table-responsive">
-        <table class="table table-hover" id="listItems" style="display: none"></table>
+        <table class="table table-hover" id="listProducts" style="display: none"></table>
       </div>
     </div>
   </body>
   <script language="javascript" src="js/config.js"></script>
   <script language="javascript" src="js/firestore.js"></script>
   <script language="javascript" src="js/items.js"></script>
+  <script language="javascript" src="js/products.js"></script>
   <script language="javascript">
     
 	// Funció per mostrar alertes a la UI
@@ -134,7 +136,7 @@
 
     // Quan la pàgina hagi carregat completament, carreguem els ítems
     window.addEventListener("load", async () => {
-      await loadItems(); // Carrega i mostra la llista d'ítems
+      await loadProducts(); // Carrega i mostra la llista d'ítems
     });
 
     // Handler per a l'inici de sessió
@@ -202,6 +204,7 @@
       } catch (error) {
         // En cas d'error, mostrem alerta
         showAlert("Error al intentar crear l'usuari", "alert-danger");
+        console.log(error);
       }
     });
 

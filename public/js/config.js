@@ -1,10 +1,10 @@
 firebase.initializeApp({
-    apiKey: "AIzaSyCvLdrwhHZDcSnpNAu9QX1K3w5Uyq9jXWg",
-    authDomain: "items-9da8e.firebaseapp.com",
-    projectId: "items-9da8e",
-    storageBucket: "items-9da8e.firebasestorage.app",
-    messagingSenderId: "251187970133",
-    appId: "1:251187970133:web:51db2cf71468483cd594dc"
+    apiKey: "AIzaSyAj5lwXkG44xdTTzaUrSkjErftTVHlFc0g",
+  authDomain: "somneteja.firebaseapp.com",
+  projectId: "somneteja",
+  storageBucket: "somneteja.firebasestorage.app",
+  messagingSenderId: "154596735768",
+  appId: "1:154596735768:web:bb757c48e3f92356047c6d"
 });
 
 const auth = firebase.auth();
