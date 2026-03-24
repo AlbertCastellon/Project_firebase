@@ -76,6 +76,7 @@ async function loadProducts() {
   try {
     // Obtenim l'array de documents des de Firestore
     const arrayItems = await selectAll(products);
+    console.log(arrayItems)
 
     // Capçalera de la taula
     const table = document.getElementById("listProducts");
@@ -90,11 +91,13 @@ async function loadProducts() {
 
     // Iterem cada document i construïm una fila per a la taula
     arrayItems.forEach((doc) => {
-      const { title, content } = doc.data();
+      const { sponsor, tipus_producte, description } = doc.data();
+      console.log(doc.id)
       table.innerHTML += `
         <tr>
-          <td>${title}</td>
-          <td>${content}</td>
+          <td>${sponsor}</td>
+          <td>${tipus_producte}</td>
+          <td>${description}</td>
           <td>
             <button type="button" class="btn btn-danger float-right" onclick="deleteItem('${doc.id}')">
               Eliminar
