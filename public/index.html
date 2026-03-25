@@ -16,7 +16,11 @@
 <body>
   <header>
     <img src="./media/Logo2 SomNeteja.png" alt="SomNeteja logo" id="logo_header">
-    <nav></nav>
+    
+    <nav>
+      <a href="#listProducts" onclick="">Botiga</a>
+      <a href="#listComarques" onclick="">Comarques</a>
+    </nav>
   </header>
   <div class="container p-5">
     <div class="row">
@@ -127,6 +131,9 @@
     <div class="table-responsive">
       <table class="table table-hover" id="listProducts" style="display: none"></table>
     </div>
+    <div class="table-responsive">
+      <table class="table table-hover" id="listComarques" style="display: none"></table>
+    </div>
   </div>
 </body>
 <script language="javascript" src="js/config.js"></script>
@@ -135,6 +142,9 @@
 <script language="javascript" src="js/products.js"></script>
 <script language="javascript">
 
+  let currentUser;
+  let userId;
+  let userPoints;
   // Funció per mostrar alertes a la UI
   function showAlert(text, type) {
     // Modifiquem el text i la classe CSS segons el tipus d'alerta
@@ -152,28 +162,44 @@
   // Quan la pàgina hagi carregat completament, carreguem els ítems
   window.addEventListener("load", async () => {
     await loadProducts(); // Carrega i mostra la llista d'ítems
+    
   });
 
   // Handler per a l'inici de sessió
   document.getElementById("login").addEventListener("click", async () => {
-    // Obtenim credencials del formulari
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
 
-    try {
-      // Intentem autenticar l'usuari amb Firebase Auth
-      await auth.signInWithEmailAndPassword(email, password);
+  try {
+    // Intentar login
+    await auth.signInWithEmailAndPassword(email, password);
 
-      // Si té èxit, mostrem missatge i canviem la UI
-      showAlert("Usuari autenticat", "alert-success");
-      document.getElementById("loginForm").style.display = "none";
-      document.getElementById("itemsForm").style.display = "block";
-      document.getElementById("listProducts").style.display = "table";
-    } catch (error) {
-      // En cas d'error, mostrem alerta d'avís
-      showAlert("Error d’autenticació", "alert-danger");
-    }
-  });
+    // Esperar a que Firebase actualice el estado
+    firebase.auth().onAuthStateChanged(async user => {
+      if (user) {
+        userId = user.uid;
+        currentUser = user;
+
+        // Mostramos UI
+        showAlert("Usuari autenticat", "alert-success");
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("itemsForm").style.display = "block";
+        document.getElementById("listProducts").style.display = "table";
+        document.getElementById("listComarques").style.display = "table";
+
+        // Cargar los datos del usuario
+        const userDoc = await db.collection("usuaris").doc(userId).get();
+        userPoints = userDoc.data().punts;
+
+        // Cargar las comarcas
+        await loadComarques();
+      }
+    });
+  } catch (error) {
+    showAlert("Error d’autenticació", "alert-danger");
+    console.error(error);
+  }
+});
 
   // Handler per mostrar el formulari de registre d'usuari nou
   document.getElementById("newUser").addEventListener("click", () => {
@@ -207,10 +233,10 @@
     try {
       // Crear usuario en Firebase Auth
       const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-      console.log(userCredential)
       // const user = userCredential.user;
       const user = auth.currentUser;
-      console.log(user)
+      userId = user.uid;
+      
 
       if (!user) {
         showAlert("Error: No s'ha pogut obtenir l'usuari de Firebase", "alert-danger");
@@ -219,6 +245,8 @@
       // Crear documento en Firestore
       await addUser(user, { telefon, nom, cognom });
 
+      const userDoc = await db.collection("users").doc(userId).get();
+      userPoints = userDoc.data().punts;
       showAlert("Usuari creat correctament", "alert-success");
 
       // Torna al login
