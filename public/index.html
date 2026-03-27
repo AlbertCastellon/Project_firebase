@@ -1,192 +1,265 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Items</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
-  </head>
+<html lang="ca">
 
-  <body>
-    <header>
-      <img src="./media/Logo2 SomNeteja.png" alt="SomNeteja logo" id="logo_header">
-      <nav></nav>
-    </header>
-    <div class="container p-5">
-      <div class="row">
-        <div class="col-8 offset-2" id="loginForm">
-          <form>
-            <div class="form-group row">
-              <label for="title" class="col-4 col-form-label">Correu electrònic:</label>
-              <div class="col-8">
-                <input type="email" class="form-control" id="loginEmail" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="content" class="col-4 col-form-label">Contrasenya:</label>
-              <div class="col-8">
-                <input type="password" class="form-control" id="loginPassword" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="offset-4 col-8">
-                <button type="button" id="newUser" class="btn btn-outline-primary float-right">
-                  Registrar un nou usuari
-                </button>
-                <button type="button" id="login" class="btn btn-default float-right mr-3">
-                  Entrar
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SomNeteja - Netejar Junts per un Futur Més Verd</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-        <div class="col-8 offset-2" id="signupForm" style="display: none">
-          <form>
-            <div class="form-group row">
-              <label for="title" class="col-4 col-form-label">Correu electrònic:</label>
-              <div class="col-8">
-                <input type="email" class="form-control" id="signupEmail" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="content" class="col-4 col-form-label">Contrasenya:</label>
-              <div class="col-8">
-                <input type="password" class="form-control" id="signupPassword" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="content" class="col-4 col-form-label">Confirmar contrasenya:</label>
-              <div class="col-8">
-                <input type="password" class="form-control" id="signupPasswordConfirm" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="offset-4 col-8">
-                <button type="button" id="signup" class="btn btn-default float-right">
-                  Enviar
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+</head>
 
-        <div class="col-8 offset-2" id="itemsForm" style="display: none">
-          <form>
-            <div class="form-group row">
-              <label for="title" class="col-4 col-form-label">Títol:</label>
-              <div class="col-8">
-                <input type="text" class="form-control" id="title" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="content" class="col-4 col-form-label"
-                >Contingut:</label
-              >
-              <div class="col-8">
-                <input type="text" class="form-control" id="content" />
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="offset-4 col-8">
-                <button type="button" id="save" class="btn btn-default float-right">
-                  Guardar
-                </button>
-              </div>
-            </div>
-            <input type="hidden" id="elementId" />
-          </form>
-        </div>
-
-        <div class="col-2">
-          <div id="alert" role="alert"></div>
-        </div>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-hover" id="listProducts" style="display: none"></table>
-      </div>
+<body>
+  <header>
+    <img src="./media/Logo2_SomNeteja.png" alt="SomNeteja logo" id="logo_header">
+    <div class="nav">
+      <a href="#" onclick="goHome()">Inici</a>
+      <a href="sobrenosaltres.html">Sobre Nosaltres</a>
+      <a href="#" onclick="showOnlyComarques()">Comarques</a>
+      <a href="jornades.html">Jornades</a>
+      <a href="#" id="shop-link" onclick="showOnlyShop()">Botiga</a>
+      <a href="premium.html">Premium</a>
     </div>
-  </body>
-  <script language="javascript" src="js/config.js"></script>
-  <script language="javascript" src="js/firestore.js"></script>
-  <script language="javascript" src="js/items.js"></script>
-  <script language="javascript" src="js/products.js"></script>
-  <script language="javascript">
-    
-	// Funció per mostrar alertes a la UI
-    function showAlert(text, type) {
-      // Modifiquem el text i la classe CSS segons el tipus d'alerta
-      const alertEl = document.getElementById("alert");
-      alertEl.innerText = text;
-      alertEl.className = `alert ${type}`;
-      alertEl.style.display = "block";
+    <div class="points">
+      <h2>Punts: <span id="userPoints">0</span></h2>
+    </div>
+  </header>
 
-      // Disparem un temporitzador per ocultar l'alerta a 2 segons
-      setTimeout(() => {
-        alertEl.style.display = "none";
-      }, 2000);
+  <main>
+    <div id="landingContent">
+      <section class="hero" id="heroSection">
+        <div class="hero-content">
+          <h1>🌱 Netejar Junts, Créixer Junts</h1>
+          <p>Participa en accions de voluntariat ambiental, guanya punts i intercanvia'ls per productes exclusius de
+            SomNeteja</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="showOnlyShop()">Explora la Botiga</button>
+            <a href="sobrenosaltres.html" class="btn btn-secondary">Descobreix Més</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container" id="featuresSection">
+        <h2 class="section-title">Per Què SomNeteja?</h2>
+        <p class="section-subtitle">Tres raons per unir-te a la comunitat de voluntaris més gran de Catalunya</p>
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin-top: 3rem;">
+          <div class="card animate-fade-up">
+            <div style="font-size: 3rem; text-align: center;">🌍</div>
+            <h3 style="color: var(--color-bosque); text-align: center; font-weight: 800;">Impacte Real</h3>
+            <p style="text-align: center; color: #666;">Cada jornada de neteja fa una diferència real en l'entorn.</p>
+          </div>
+          <div class="card animate-fade-up" style="animation-delay: 0.1s;">
+            <div style="font-size: 3rem; text-align: center;">⭐</div>
+            <h3 style="color: var(--color-bosque); text-align: center; font-weight: 800;">Guanya Punts</h3>
+            <p style="text-align: center; color: #666;">Per cada jornada guanyes punts per intercanviar.</p>
+          </div>
+          <div class="card animate-fade-up" style="animation-delay: 0.2s;">
+            <div style="font-size: 3rem; text-align: center;">👥</div>
+            <h3 style="color: var(--color-bosque); text-align: center; font-weight: 800;">Comunitat</h3>
+            <p style="text-align: center; color: #666;">Forma part d'una comunitat compromesa.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="section container" id="shopContainerSection" style="display: none;">
+      <h2 class="section-title">Botiga de Productes</h2>
+      <p class="section-subtitle">Intercanvia els teus punts per productes exclusius</p>
+      <div id="shopProducts" class="products-grid"></div>
+
+      <div id="cartSection" style="display: none; margin-top: 40px;">
+        <div class="card">
+          <div class="card-header">El Teu Carrito</div>
+          <div style="padding: 2rem;">
+            <div id="cartItems"></div>
+            <h3>Total: <span id="cartTotal">0</span> punts</h3>
+            <button class="btn btn-primary" style="width:100%">Canjear Punts</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="table-responsive">
+      <table class="table table-hover" id="listComarques"></table>
+    </div>
+
+    <section class="section container" id="authSection">
+      <div id="loginForm" class="card" style="max-width: 500px; margin: 3rem auto;">
+        <div class="card-header">Inicia Sessió</div>
+        <div style="padding: 2.5rem;">
+          <input type="email" class="form-control mb-3" id="loginEmail" placeholder="Email">
+          <input type="password" class="form-control mb-3" id="loginPassword" placeholder="Contrasenya">
+          <div id="loginAlert" class="alert" style="display: none;"></div>
+          <button type="button" id="login" class="btn btn-primary w-100">Entrar</button>
+          <button type="button" id="newUser" class="btn btn-secondary w-100 mt-2">Nou Usuari</button>
+        </div>
+      </div>
+
+      <div id="signupForm" class="card" style="max-width: 600px; margin: 3rem auto; display: none;">
+        <div class="card-header">Crear Compte</div>
+        <div style="padding: 2.5rem;">
+          <form>
+            <div class="form-group row mb-3">
+              <label class="col-sm-4 col-form-label font-weight-bold">Nom:</label>
+              <div class="col-sm-8"><input type="text" class="form-control" id="signupNom" placeholder="El teu nom">
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label class="col-sm-4 col-form-label font-weight-bold">Cognom:</label>
+              <div class="col-sm-8"><input type="text" class="form-control" id="signupCognom"
+                  placeholder="El teu cognom"></div>
+            </div>
+            <div class="form-group row mb-3">
+              <label class="col-sm-4 col-form-label font-weight-bold">Telèfon:</label>
+              <div class="col-sm-8"><input type="text" class="form-control" id="signupTelefon"
+                  placeholder="Ex: 600 000 000"></div>
+            </div>
+            <div class="form-group row mb-3">
+              <label class="col-sm-4 col-form-label font-weight-bold">Email:</label>
+              <div class="col-sm-8"><input type="email" class="form-control" id="signupEmail"
+                  placeholder="correu@exemple.com"></div>
+            </div>
+            <div class="form-group row mb-3">
+              <label class="col-sm-4 col-form-label font-weight-bold">Contrasenya:</label>
+              <div class="col-sm-8"><input type="password" class="form-control" id="signupPassword"
+                  placeholder="Mínim 6 caràcters"></div>
+            </div>
+            <div class="form-group row mb-4">
+              <label class="col-sm-4 col-form-label font-weight-bold">Confirmar:</label>
+              <div class="col-sm-8"><input type="password" class="form-control" id="signupPasswordConfirm"
+                  placeholder="Repeteix la contrasenya"></div>
+            </div>
+            <div id="signupAlert" class="alert" style="display: none;"></div>
+            <button type="button" id="signup" class="btn btn-primary w-100 mb-2">Registrar</button>
+            <button type="button" id="backToLogin" class="btn btn-secondary w-100">Enrere</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div id="authenticatedSection" style="display: none; padding-bottom: 50px;">
+      <section class="section container" style="text-align: center; border-top: 1px solid #eee;">
+        <h2 class="section-title">Benvingut a SomNeteja</h2>
+        <p id="userWelcomeMsg" style="font-weight: bold; color: var(--color-bosque);"></p>
+        <button type="button" id="logoutBtn" class="btn btn-secondary">Tancar Sessió</button>
+      </section>
+    </div>
+
+    <!-- <h1 class="section-title">Properes Jornades</h1>
+    <p class="section-subtitle">Consulta les activitats de neteja programades i apunta-t'hi per guanyar punts.</p>
+
+    <div id="jornades-container" class="products-grid">
+    </div> -->
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 <strong>Impuls Net</strong> - SomNeteja.</p>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/firestore.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/jornades.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/comarques.js"></script>
+  <script>
+    // TORNA A L'INICI (Mostra landing, amaga botiga)
+    let userPoints = 0;
+    let userId = null; // Variable global para que comarques.js la detecte
+
+    // TORNA A L'INICI
+    function goHome() {
+      document.getElementById('landingContent').style.display = 'block';
+      document.getElementById('shopContainerSection').style.display = 'none';
+      document.getElementById('listComarques').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Quan la pàgina hagi carregat completament, carreguem els ítems
-    window.addEventListener("load", async () => {
-      await loadProducts(); // Carrega i mostra la llista d'ítems
-    });
+    // MOSTRA NOMÉS BOTIGA
+    function showOnlyShop() {
+      document.getElementById('landingContent').style.display = 'none';
+      document.getElementById('listComarques').style.display = 'none';
+      document.getElementById('shopContainerSection').style.display = 'block';
+      if (typeof loadProducts === 'function') loadProducts();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    // Handler per a l'inici de sessió
-    document.getElementById("login").addEventListener("click", async () => {
-      // Obtenim credencials del formulari
-      const email = document.getElementById("loginEmail").value;
-      const password = document.getElementById("loginPassword").value;
+    // NUEVA FUNCIÓN: MOSTRA NOMÉS COMARQUES
+    function showOnlyComarques() {
+      document.getElementById('landingContent').style.display = 'none';
+      document.getElementById('shopContainerSection').style.display = 'none';
+      document.getElementById('listComarques').style.display = 'table';
+      if (typeof loadComarques === 'function') loadComarques();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
+    // CARREGAR DADES USUARI (Tu lógica de Firebase)
+    async function loadUserData(uid) {
+      userId = uid;
       try {
-        // Intentem autenticar l'usuari amb Firebase Auth
-        await auth.signInWithEmailAndPassword(email, password);
-
-        // Si té èxit, mostrem missatge i canviem la UI
-        showAlert("Usuari autenticat", "alert-success");
-        document.getElementById("loginForm").style.display = "none";
-        document.getElementById("itemsForm").style.display = "block";
-        document.getElementById("listItems").style.display = "table";
+        const userDoc = await db.collection("usuaris").doc(userId).get();
+        if (userDoc.exists) {
+          userPoints = userDoc.data().punts || 0;
+          document.getElementById('userPoints').textContent = userPoints;
+        } else {
+          await db.collection("usuaris").doc(userId).set({ punts: 0 });
+          document.getElementById('userPoints').textContent = "0";
+        }
       } catch (error) {
-        // En cas d'error, mostrem alerta d'avís
-        showAlert("Error d’autenticació", "alert-danger");
+        console.error("Error Firestore:", error);
+      }
+    }
+
+    // ESTAT DE FIREBASE
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById("authSection").style.display = "none";
+        document.getElementById("authenticatedSection").style.display = "block";
+        document.getElementById("userWelcomeMsg").innerText = user.email;
+        loadUserData(user.uid);
+      } else {
+        userId = null;
+        document.getElementById("authSection").style.display = "block";
+        document.getElementById("authenticatedSection").style.display = "none";
+        document.getElementById("userPoints").textContent = "0";
+        goHome();
       }
     });
 
-    // Handler per mostrar el formulari de registre d'usuari nou
-    document.getElementById("newUser").addEventListener("click", () => {
-      document.getElementById("loginForm").style.display = "none";
-      document.getElementById("signupForm").style.display = "block";
+    // LOGIN / SIGNUP / LOGOUT (Tus eventos originales)
+    document.getElementById("login").addEventListener("click", async () => {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      try { await auth.signInWithEmailAndPassword(email, password); }
+      catch (e) { alert("Error en l'accés"); }
     });
 
     // Handler per al registre d'un nou usuari
     document.getElementById("signup").addEventListener("click", async () => {
-      // Llegim valors del formulari
       const email = document.getElementById("signupEmail").value;
       const password = document.getElementById("signupPassword").value;
-      const passwordConfirm = document.getElementById(
-        "signupPasswordConfirm"
-      ).value;
+      const passwordConfirm = document.getElementById("signupPasswordConfirm").value;
+      const telefon = document.getElementById("signupTelefon").value;
+      const nom = document.getElementById("signupNom").value;
+      const cognom = document.getElementById("signupCognom").value;
+      console.log(nom)
 
-      // Validacions bàsiques de formulari
+      // Validaciones básicas
       if (!email || email.indexOf("@") < 1) {
         showAlert("Email incorrecte", "alert-danger");
         return;
       }
-      if (!password) {
-        showAlert("La contrasenya és obligatòria", "alert-danger");
-        return;
-      }
-      if (password.length < 8) {
-        showAlert("La contrasenya ha de tenir una longitud mínima de 8 caràcters", "alert-danger");
+      if (!password || password.length < 8) {
+        showAlert("La contrasenya ha de tenir almenys 8 caràcters", "alert-danger");
         return;
       }
       if (password !== passwordConfirm) {
@@ -195,36 +268,49 @@
       }
 
       try {
-        // Creem l'usuari amb Firebase Auth
-        await auth.createUserWithEmailAndPassword(email, password);
+        // Crear usuario en Firebase Auth
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        // const user = userCredential.user;
+        const user = auth.currentUser;
+        userId = user.uid;
 
-        // Si té èxit, mostrem missatge i tornem a la vista de login
+
+        if (!user) {
+          showAlert("Error: No s'ha pogut obtenir l'usuari de Firebase", "alert-danger");
+          return;
+        }
+        // Crear documento en Firestore
+        await addUser(user, { telefon, nom, cognom });
+
+        const userDoc = await db.collection("users").doc(userId).get();
+        userPoints = userDoc.data().punts;
         showAlert("Usuari creat correctament", "alert-success");
-        document.getElementById("loginForm").style.display = "block";
+
+        // Torna al login
         document.getElementById("signupForm").style.display = "none";
+        document.getElementById("loginForm").style.display = "block";
+
       } catch (error) {
-        // En cas d'error, mostrem alerta
-        showAlert("Error al intentar crear l'usuari", "alert-danger");
-        console.log(error);
+        console.error(error);
+        showAlert("Error al crear l'usuari: " + error.message, "alert-danger");
       }
     });
 
-    // Handler per guardar o actualitzar un ítem
-    document.getElementById("save").addEventListener("click", async () => {
-      // Obtenim valors del formulari
-      const id = document.getElementById("elementId").value;
-      const title = document.getElementById("title").value;
-      const content = document.getElementById("content").value;
-      const doc = { title, content }; // Objecte amb les dades a desar
+    document.getElementById("logoutBtn").addEventListener("click", () => auth.signOut());
 
-      if (!id) {
-        // Si no hi ha ID, afegim un nou ítem
-        await addItem(doc);
-      } else {
-        // Si hi ha ID, actualitzem l'ítem existent
-        await updateItem(id, doc);
-      }
+    document.getElementById("newUser").addEventListener("click", () => {
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("signupForm").style.display = "block";
     });
-	
+
+    document.getElementById("backToLogin").addEventListener("click", () => {
+      document.getElementById("signupForm").style.display = "none";
+      document.getElementById("loginForm").style.display = "block";
+    });
   </script>
+
+
+  </script>
+</body>
+
 </html>

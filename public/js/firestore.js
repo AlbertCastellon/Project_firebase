@@ -1,5 +1,5 @@
 // Instància de Firestore
-const db = firebase.firestore();
+// const db = firebase.firestore();
 
 /**
  * Afegeix un nou document a la col·lecció.
@@ -149,3 +149,15 @@ async function updateById(collection, id, doc) {
     );
   }
 }
+
+/*// Exposar funcions globals per ús des d'altres scripts que no usen modules
+if (typeof window !== 'undefined') {
+  window.db = db;
+  window.add = add;
+  window.deleteById = deleteById;
+  window.selectAll = selectAll;
+  window.selectById = selectById;
+  window.selectWhere = selectWhere;
+  window.selectLike = selectLike;
+  window.updateById = updateById;
+}*/

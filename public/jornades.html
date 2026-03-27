@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornades - SomNeteja</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header>
+        <img src="./media/Logo2_SomNeteja.png" alt="SomNeteja logo" id="logo_header" onclick="window.location.href='index.html'">
+        
+        <nav class="nav">
+            <a href="index.html">Inici</a>
+            <a href="sobrenosaltres.html">Sobre Nosaltres</a>
+            <a href="index.html#comarques">Comarques</a>
+            <a href="jornades.html">Jornades</a>
+            <a href="index.html#shop-link">Botiga</a>
+            <a href="premium.html">Premium</a>
+        </nav>
+
+        <div class="points">
+            <h2>Punts: <span id="userPoints">0</span></h2>
+        </div>
+    </header>
+
+    <main class="container animate-fade-up">
+        <h1 class="section-title">Properes Jornades</h1>
+        <p class="section-subtitle">Consulta les activitats de neteja programades i apunta-t'hi per guanyar punts.</p>
+
+        <div id="jornades-container" class="products-grid">
+            </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    
+    <script src="js/config.js"></script> 
+    <script src="js/firestore.js"></script>
+    <script src="js/jornades.js"></script>
+</body>
+</html>

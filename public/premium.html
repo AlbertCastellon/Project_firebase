@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium - SomNeteja</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <header>
+        <img src="./media/Logo2_SomNeteja.png" alt="SomNeteja logo" id="logo_header">
+        <div class="nav">
+            <a href="index.html">Inici</a>
+            <a href="sobrenosaltres.html">Sobre Nosaltres</a>
+            <a href="">Comarques</a>
+            <a href="">Jornades</a>
+            <a href="index.html#shop-link">Botiga</a>
+            <a href="premium.html">Premium</a>
+        </div>
+        <div class="points">
+            <h2>Punts: <span id="userPoints">0</span></h2>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>SomNeteja Premium</h1>
+                <p>Accés exclusiu a beneficis i productes premium</p>
+            </div>
+        </section>
+
+        <section class="section container">
+            <h2 class="section-title">Compara els Plans</h2>
+
+            <div
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 5rem; max-width: 1000px; margin-left: auto; margin-right: auto;">
+                <div class="card animate-slide-left">
+                    <div class="card-header">Plan Estàndard</div>
+                    <div style="padding: 2.5rem;">
+                        <div style="text-align: center; margin-bottom: 2.5rem;">
+                            <div style="font-size: 2.8rem; font-weight: 900; color: var(--color-vibrante);">Gratuit
+                            </div>
+                            <p style="color: #666; margin-top: 0.7rem; font-weight: 600;">Per sempre</p>
+                        </div>
+
+                        <ul style="list-style: none; padding: 0;">
+                            <li
+                                style="padding: 1rem 0; border-bottom: 1px solid var(--color-gris-medio); color: #555; display: flex; align-items: center; gap: 0.8rem;">
+                                <span
+                                    style="color: var(--color-vibrante); font-weight: bold; font-size: 1.2rem;">✓</span>
+                                Participar en jornades
+                            </li>
+                            <li
+                                style="padding: 1rem 0; border-bottom: 1px solid var(--color-gris-medio); color: #555; display: flex; align-items: center; gap: 0.8rem;">
+                                <span
+                                    style="color: var(--color-vibrante); font-weight: bold; font-size: 1.2rem;">✓</span>
+                                Guanyar punts
+                            </li>
+                            <li
+                                style="padding: 1rem 0; border-bottom: 1px solid var(--color-gris-medio); color: #555; display: flex; align-items: center; gap: 0.8rem;">
+                                <span
+                                    style="color: var(--color-vibrante); font-weight: bold; font-size: 1.2rem;">✓</span>
+                                Accés a la botiga
+                            </li>
+                            <li
+                                style="padding: 1rem 0; border-bottom: 1px solid var(--color-gris-medio); color: #999; display: flex; align-items: center; gap: 0.8rem;">
+                                <span style="color: #ccc; font-weight: bold; font-size: 1.2rem;">✗</span> Productes
+                                premium
+                            </li>
+                            <li
+                                style="padding: 1rem 0; border-bottom: 1px solid var(--color-gris-medio); color: #999; display: flex; align-items: center; gap: 0.8rem;">
+                                <span style="color: #ccc; font-weight: bold; font-size: 1.2rem;">✗</span> Descomptes
+                                exclusius
+                            </li>
+                            <li style="padding: 1rem 0; color: #999; display: flex; align-items: center; gap: 0.8rem;">
+                                <span style="color: #ccc; font-weight: bold; font-size: 1.2rem;">✗</span> Prioritat en
+                                jornades
+                            </li>
+                        </ul>
+
+                        <button class="btn btn-secondary" style="width: 100%; margin-top: 2.5rem;" disabled>
+                            Ja estàs en aquest plan
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card animate-slide-right"
+                    style="border: 3px solid var(--color-vibrante); position: relative; transform: scale(1.05); overflow: visible !important;">
+                    
+                    <div
+                        style="position: absolute; top: -20px; right: -10px; background: #e6ff00; color: #084734; padding: 0.6rem 1.5rem; border-radius: 12px; font-weight: 900; font-size: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.2); border: 2px solid #084734; z-index: 100; white-space: nowrap;">
+                        ⭐ RECOMANAT
+                    </div>
+                    
+                    <div class="card-header"
+                        style="background: linear-gradient(135deg, var(--color-vibrante) 0%, #b8e65f 100%); color: var(--color-bosque);">
+                        Plan Premium
+                    </div>
+                    <div style="padding: 2.5rem;">
+                        <div style="text-align: center; margin-bottom: 2.5rem;">
+                            <div style="font-size: 2.8rem; font-weight: 900; color: var(--color-bosque);">11€<span
+                                    style="font-size: 1.3rem; color: #666;">/mes</span></div>
+                            <p style="color: #666; margin-top: 0.7rem; font-weight: 600;">Subscripció mensual</p>
+                        </div>
+
+                        <ul style="list-style: none; padding: 0;">
+                            <li
+                                style="padding: 1rem 0; border-bottom: 1px solid var(--color-gris-medio); color: #555; display: flex; align-items: center; gap: 0.8rem;">
+                                <span
+                                    style="color: var(--color-vibrante); font-weight: bold; font-size: 1.2rem;">✓</span>
+                                Tot del plan estàndard
+                            </li>
+                            <li
+                                style="padding: 1rem 0; border-bottom: 1px solid var(--color-gris-medio); color: #555; display: flex; align-items: center; gap: 0.8rem;">
+                                <span
+                                    style="color: var(--color-vibrante); font-weight: bold; font-size: 1.2rem;">✓</span>
+                                Productes premium
+                            </li>
+                            <li
+                                style="padding: 1rem 0; border-bottom: 1px solid var(--color-gris-medio); color: #555; display: flex; align-items: center; gap: 0.8rem;">
+                                <span
+                                    style="color: var(--color-vibrante); font-weight: bold; font-size: 1.2rem;">✓</span>
+                                Descomptes 20%
+                            </li>
+                            <li
+                                style="padding: 1rem 0; border-bottom: 1px solid var(--color-gris-medio); color: #555; display: flex; align-items: center; gap: 0.8rem;">
+                                <span
+                                    style="color: var(--color-vibrante); font-weight: bold; font-size: 1.2rem;">✓</span>
+                                Prioritat en jornades
+                            </li>
+                            <li
+                                style="padding: 1rem 0; border-bottom: 1px solid var(--color-gris-medio); color: #555; display: flex; align-items: center; gap: 0.8rem;">
+                                <span
+                                    style="color: var(--color-vibrante); font-weight: bold; font-size: 1.2rem;">✓</span>
+                                🎁 Regal inicial
+                            </li>
+                            <li style="padding: 1rem 0; color: #555; display: flex; align-items: center; gap: 0.8rem;">
+                                <span
+                                    style="color: var(--color-vibrante); font-weight: bold; font-size: 1.2rem;">✓</span>
+                                Suport prioritari
+                            </li>
+                        </ul>
+
+                        <button id="premiumBtn" class="btn btn-primary"
+                            style="width: 100%; margin-top: 2.5rem; font-size: 1.1rem; font-weight: 800;">
+                            Actualizar a Premium
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section container">
+            <h2 class="section-title">Beneficis Premium</h2>
+            <p class="section-subtitle">Descobreix tot el que obtens amb la teva subscripció</p>
+
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin-top: 3rem;">
+                <div class="card animate-fade-up">
+                    <div style="padding: 2rem; text-align: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 1rem;">🎁</div>
+                        <h4 style="color: var(--color-bosque); font-weight: 800; margin-bottom: 0.8rem;">Regal d'Inici
+                        </h4>
+                        <p style="color: #666; line-height: 1.8;">Rebeix un <strong>Armilla + Guants</strong> exclusius
+                            de SomNeteja quan t'uneixis al plan premium.</p>
+                    </div>
+                </div>
+
+                <div class="card animate-fade-up" style="animation-delay: 0.1s;">
+                    <div style="padding: 2rem; text-align: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 1rem;">💰</div>
+                        <h4 style="color: var(--color-bosque); font-weight: 800; margin-bottom: 0.8rem;">Descomptes</h4>
+                        <p style="color: #666; line-height: 1.8;">Gaudeix d'un <strong>20% de descompte</strong> en tots
+                            els productes de la botiga.</p>
+                    </div>
+                </div>
+
+                <div class="card animate-fade-up" style="animation-delay: 0.2s;">
+                    <div style="padding: 2rem; text-align: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 1rem;">⭐</div>
+                        <h4 style="color: var(--color-bosque); font-weight: 800; margin-bottom: 0.8rem;">Punts Bonus
+                        </h4>
+                        <p style="color: #666; line-height: 1.8;">Guanya un <strong>50% més de punts</strong> en cada
+                            jornada de neteja.</p>
+                    </div>
+                </div>
+
+                <div class="card animate-fade-up" style="animation-delay: 0.3s;">
+                    <div style="padding: 2rem; text-align: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 1rem;">🎯</div>
+                        <h4 style="color: var(--color-bosque); font-weight: 800; margin-bottom: 0.8rem;">Prioritat</h4>
+                        <p style="color: #666; line-height: 1.8;">Accés prioritari a les millors jornades i grups
+                            exclusius.</p>
+                    </div>
+                </div>
+
+                <div class="card animate-fade-up" style="animation-delay: 0.4s;">
+                    <div style="padding: 2rem; text-align: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 1rem;">👑</div>
+                        <h4 style="color: var(--color-bosque); font-weight: 800; margin-bottom: 0.8rem;">Badge Premium
+                        </h4>
+                        <p style="color: #666; line-height: 1.8;">Mostra el teu badge de membre premium al teu perfil.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card animate-fade-up" style="animation-delay: 0.5s;">
+                    <div style="padding: 2rem; text-align: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 1rem;">📞</div>
+                        <h4 style="color: var(--color-bosque); font-weight: 800; margin-bottom: 0.8rem;">Suport</h4>
+                        <p style="color: #666; line-height: 1.8;">Accés a suport prioritari del nostre equip.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section container">
+            <div class="card"
+                style="background: linear-gradient(135deg, rgba(206, 241, 123, 0.15) 0%, rgba(8, 71, 52, 0.05) 100%); border: 3px solid var(--color-vibrante);">
+                <div style="padding: 3rem; text-align: center;">
+                    <h3 style="color: var(--color-bosque); font-weight: 900; margin-bottom: 1.5rem; font-size: 1.8rem;">
+                        🎁 Regal Especial per a Nous Members Premium
+                    </h3>
+                    <p style="font-size: 1.15rem; color: #555; margin-bottom: 2rem; line-height: 1.9;">
+                        Quan t'uneixis al plan premium, rebiras automàticament un <strong>Armilla de SomNeteja</strong> i
+                        <strong>Guants de Treball</strong> de qualitat premium. Aquests productes estan valorats en 35€
+                        i són exclusius per a membres premium!
+                    </p>
+                    <div style="display: flex; gap: 3rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;"><img src="media/ChalecoSomNeteja.png" width="200px" alt="guants"></div>
+                            <p style="color: var(--color-bosque); font-weight: 800; font-size: 1.1rem;">Armilla Premium
+                            </p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;"><img src="media/GuantsSomNeteja.png" width="200px" alt="guants"></div>
+                            <p style="color: var(--color-bosque); font-weight: 800; font-size: 1.1rem;">Guants de
+                                Treball</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section container">
+            <h2 class="section-title">Preguntes Freqüents</h2>
+
+            <div style="max-width: 900px; margin: 3rem auto;">
+                <div class="card" style="margin-bottom: 1.5rem; overflow: hidden;">
+                    <div style="padding: 1.8rem; cursor: pointer; background: linear-gradient(135deg, rgba(206, 241, 123, 0.1) 0%, rgba(206, 241, 123, 0.05) 100%); display: flex; justify-content: space-between; align-items: center;"
+                        onclick="toggleFAQ(this)">
+                        <h4 style="color: var(--color-bosque); font-weight: 800; margin: 0;">
+                            Puc cancel·lar la meva subscripció en qualsevol moment?
+                        </h4>
+                        <span style="font-size: 1.2rem; transition: transform 0.3s ease; color: var(--color-bosque);">▼</span>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 1.8rem; max-height: 0; overflow: hidden; transition: all 0.4s ease; background: white;">
+                        <p style="color: #555; margin: 1.8rem 0; line-height: 1.8;">
+                            Sí, pots cancel·lar la teva subscripció premium en qualsevol moment sense penalitzacions. La teva subscripció es mantindrà activa fins al final del cicle de facturació actual.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 1.5rem; overflow: hidden;">
+                    <div style="padding: 1.8rem; cursor: pointer; background: linear-gradient(135deg, rgba(206, 241, 123, 0.1) 0%, rgba(206, 241, 123, 0.05) 100%); display: flex; justify-content: space-between; align-items: center;"
+                        onclick="toggleFAQ(this)">
+                        <h4 style="color: var(--color-bosque); font-weight: 800; margin: 0;">
+                            Quan rebré el meu regal?
+                        </h4>
+                        <span style="font-size: 1.2rem; transition: transform 0.3s ease; color: var(--color-bosque);">▼</span>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 1.8rem; max-height: 0; overflow: hidden; transition: all 0.4s ease; background: white;">
+                        <p style="color: #555; margin: 1.8rem 0; line-height: 1.8;">
+                            Rebiras el teu xaleco i guants dins de 5-7 dies laborals després de confirmar la teva subscripció. Els productes s'enviaran a l'adreça que proporcinis durant el procés de pagament.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 1.5rem; overflow: hidden;">
+                    <div style="padding: 1.8rem; cursor: pointer; background: linear-gradient(135deg, rgba(206, 241, 123, 0.1) 0%, rgba(206, 241, 123, 0.05) 100%); display: flex; justify-content: space-between; align-items: center;"
+                        onclick="toggleFAQ(this)">
+                        <h4 style="color: var(--color-bosque); font-weight: 800; margin: 0;">
+                            Quins mètodes de pagament accepteu?
+                        </h4>
+                        <span style="font-size: 1.2rem; transition: transform 0.3s ease; color: var(--color-bosque);">▼</span>
+                    </div>
+                    <div class="faq-answer" style="padding: 0 1.8rem; max-height: 0; overflow: hidden; transition: all 0.4s ease; background: white;">
+                        <p style="color: #555; margin: 1.8rem 0; line-height: 1.8;">
+                            Acceptem totes les targetes de crèdit principals (Visa, Mastercard, American Express) i transferència bancària. Els pagaments es processen de forma segura a través de Stripe.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section container" style="text-align: center;">
+            <h2 class="section-title">Estàs llest per actualizar?</h2>
+            <p class="section-subtitle">Uneix-te a la comunitat premium i gaudeix de beneficis exclusius!</p>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <button id="premiumBtnBottom" class="btn btn-primary"
+                    style="font-size: 1.1rem; padding: 1rem 2.5rem; font-weight: 800;">
+                    Actualizar a Premium
+                </button>
+                <a href="index.html" class="btn btn-secondary"
+                    style="font-size: 1.1rem; padding: 1rem 2.5rem; font-weight: 800;">
+                    Tornar a la Botiga
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 <strong>Impuls Net</strong> - SomNeteja. Netejar junts, créixer junts.</p>
+        <p>Contacte: <a href="mailto:info@impulnet.cat">info@impulnet.cat</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userPoints = localStorage.getItem('userPoints') || '0';
+            document.getElementById('userPoints').textContent = userPoints;
+        });
+
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('span');
+            const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '';
+
+            document.querySelectorAll('.faq-answer').forEach(el => {
+                el.style.maxHeight = '0px';
+                el.style.borderTop = 'none';
+                el.previousElementSibling.querySelector('span').style.transform = 'rotate(0deg)';
+            });
+
+            if (!isOpen) {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                answer.style.borderTop = '2px solid #eee';
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        document.getElementById('premiumBtn').addEventListener('click', handlePremiumPurchase);
+        document.getElementById('premiumBtnBottom').addEventListener('click', handlePremiumPurchase);
+
+        function handlePremiumPurchase() {
+            alert('Redirigint a la plataforma de pagament segura...\n\nEn una aplicació real, això obrira Stripe o el teu processador de pagaments.');
+        }
+    </script>
+</body>
+
+</html>
